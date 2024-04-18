@@ -14,7 +14,7 @@ import {
 
 import PetCardModal from '../components/PetCardModal'
 import SvgIcon from '../components/SvgIcon'
-import ApiClient, { PetData } from '../helpers/ApiClient'
+import ApiClient, { PetData, PetType } from '../helpers/ApiClient'
 
 const FilterImageAll = require('../assets/filter_all.png')
 const FilterImageCat = require('../assets/filter_cat.png')
@@ -73,6 +73,20 @@ export default (): JSX.Element => {
   const [selectedPet, setSelectedPet] = useState<PetData>()
 
   const allPets = useMemo(() => ApiClient.getPets(), [])
+
+  const predicate = (item: PetData) => {
+    if (filter == FilterType.All) {
+      return true
+    }
+    if (item.type == PetType.Cat && filter == FilterType.Cat){
+    return true }
+    if (item.type == PetType.Dog && filter == FilterType.Dog){
+      return true }
+      return false
+    }
+    
+
+  const filterPets = allPets.filter(predicate)
 
   const renderPetCard: ListRenderItem<PetData> = ({ item }) => {
     return (
@@ -175,7 +189,7 @@ export default (): JSX.Element => {
         />
       </View>
       <FlatList
-        data={allPets}
+        data={filterPets}
         style={{ flex: 1 }}
         numColumns={2}
         renderItem={renderPetCard}
