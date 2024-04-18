@@ -176,7 +176,6 @@ export default (): JSX.Element => {
       </View>
       <FlatList
         data={allPets}
-        scrollEnabled={false}
         style={{ flex: 1 }}
         numColumns={2}
         renderItem={renderPetCard}
