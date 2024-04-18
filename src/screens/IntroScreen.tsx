@@ -19,6 +19,7 @@ const IntroScreen: React.FC<{ setIsIntroCompleted: () => void }> = ({
             color: 'white',
             paddingHorizontal: 15,
             marginBottom: 50,
+            textAlign: 'center',
           }}>
           Happiness is closer than you think
         </Text>
